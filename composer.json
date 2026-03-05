@@ -1,0 +1,22 @@
+{
+    "name": "leonardo.assis/gerador-pdf.php",
+    "description": "Gerador de pdf",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "LeonardoAssis\\GeradorPdfPhp\\": "App/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Le0assis",
+            "email": "leoribeiroassis@gmail.com"
+        }
+    ],
+    "require": {
+        "mpdf/mpdf": "^8.2",
+        "slim/slim": "^4.15",
+        "slim/psr7": "^1.8"
+    }
+}
