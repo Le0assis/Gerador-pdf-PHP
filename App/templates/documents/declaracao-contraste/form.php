@@ -9,7 +9,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/gerar/declaracao-contraste" id="form" method="GET">
+    <form action="/gerar/declaracao-contraste" id="form" method="POST">
         <input type="text" name="name">
         <input type="date" name="date">
         <button type="submit">
