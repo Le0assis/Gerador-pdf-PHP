@@ -71,7 +71,8 @@ function secondaryScreen(btnID, canvasID, step1ID, step2ID, form, signature){
 
             startSignature(canvasID, form, signature)
         })
-    };
+    }
 
 
 }
+

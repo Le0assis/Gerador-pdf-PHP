@@ -4,11 +4,15 @@
 
 $mpdf = new \Mpdf\Mpdf();
 // $mpdf = new \Mpdf\Mpdf();
+$css = file_get_contents(__DIR__ . "/assets/style/test.css");
+$js =  file_get_contents(__DIR__ . "/assets/signature.js");
 
+
+// var_dump($js);
 
 $app->get("/", function ($request, $response) {
 
-    $home = __DIR__ . "/templates/lista.php";
+    $home = __DIR__ . "/lista.php";
 
     ob_start();
     require $home;
@@ -19,16 +23,16 @@ $app->get("/", function ($request, $response) {
     return $response;
 });
 
-$app->get('/documento/{type}', function ($request, $response, $args) {
+$app->get('/documents/{type}', function ($request, $response, $args) use ($css, $js) {
 
-    echo("PASSOU");
+    echo ("PASSOU");
     $type = $args['type'];
 
-    $template = __DIR__ . "/templates/documents/$type/form.php";
+    $template = __DIR__ . "/documents/$type/form.php";
 
     if (!file_exists($template)) {
-        echo("ERRO");
-        echo($template);
+        echo ("ERRO");
+        echo ($template);
         $response->getBody()->write("Documento não existe");
         return $response;
     }
@@ -36,36 +40,41 @@ $app->get('/documento/{type}', function ($request, $response, $args) {
     ob_start();
     require $template;
     $html = ob_get_clean();
-
+    $html .="<style>$css</style>"; 
+    $html .="<script>$js</script>";
     $response->getBody()->write($html);
 
     return $response;
 });
 
-$app->post("/gerar/{type}", function($request, $response, $args) use ($mpdf){
+$app->post("/gerar/{type}", function ($request, $response, $args) use ($mpdf, $css) {
 
-    $mpdf = new \Mpdf\Mpdf();
-    
+    $mpdf = new \Mpdf\Mpdf([
+        'format' => 'A4',
+        'debug' => true,
+        'showImageErrors' => true
+    ]);
+
     $type = $args['type'];
     $data = $request->getParsedBody();
     extract($data);
-    
-    $document = __DIR__ . "/templates/documents/$type/pdf.php";
-    $css = file_get_contents(__DIR__ . '/templates/documents/assets/style/test.css');
+    $document = __DIR__ . "/documents/$type/pdf.php";
 
     ob_start();
     require $document;
 
     $html = ob_get_clean();
+    try {
+        $name = $data['name'];
+        $mpdf->WriteHTML($css, \Mpdf\HTMLParserMode::HEADER_CSS);
+        $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
 
-
-
-    $mpdf->WriteHTML($css, \Mpdf\HTMLParserMode::HEADER_CSS);
-    $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
-
-    $mpdf->Output("type.pdf", "D");
-
-});
+        $mpdf->Output("$name.pdf", "I");
+    } catch (\Mpdf\MpdfException $e) {
+        echo ($html);
+        $mpdf->Output($e->getMessage());
+    }
+    });
 
 
 
