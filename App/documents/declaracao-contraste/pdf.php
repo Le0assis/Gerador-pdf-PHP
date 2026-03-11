@@ -7,31 +7,58 @@
 </head>
 
 <body>
+    <header>
+        <img src="<?= __DIR__ . '/../../assets/components/header.png' ?>" alt="" id="header">
+    </header>
 
-    <img src="<?= __DIR__ ?>/../../assets/components/header.png" alt="" id="header">
-    <div id="container">
+    <main>
+        <table>
 
-        <h2>Entrevista</h2>
-        <h1>TESTE</h1>
-        <p>"Eu <?= $_POST['name'] ?> declaro que fui submetido(a) ao
-            exame de imagem, com uso de contraste, conforme solicitação médica.
-            Estou ciente que, de acordo com as condutas médicas e protocolos de radiologia, além do
-            médico solicitante, também é de responsabilidade do médico radiologista indicar a
-            utilização de contraste, a fim de garantir uma melhor definição das imagens e um
-            diagnóstico preciso."
-        </p>
+            <tr>
+                <td class="td-titulo">
+                    <h1>Entrevista</h1>
+                </td>
+            </tr>
+            <tr>
+                <td class="td-text">
+                    <p>Eu <?= $name ?> declaro que fui submetido(a) ao
+                        exame de imagem, com uso de contraste, conforme solicitação médica.
+                        Estou ciente que, de acordo com as condutas médicas e protocolos de radiologia, além do
+                        médico solicitante, também é de responsabilidade do médico radiologista indicar a
+                        utilização de contraste, a fim de garantir uma melhor definição das imagens e um
+                        diagnóstico preciso.
+                    </p>
+                </td>
+            </tr>
 
-        <br><br>
+            <tr>
+                <td>
 
-        <h2>Assinatura do Paciente</h2>
+                    <div id="date">
+                        Marìlia,
+                        <span class="day Line"> 01</span>
+                        de
+                        <span class="month Line">janeiro</span>
+                        de
+                        <span class="year Line">2023</span>
+                    </div>
 
-        <br><br>
 
-        <img src="<?= __DIR__ ?>/../../assets/components/signature.png" alt="">
+                    <div id="signature">
+                        <img src="<?= __DIR__ . '/../../assets/components/signature.png' ?>" alt="Não achei" id="signature-img">
+                    </div>
 
-    </div>
+                    <h2 id="signature-text">Assinatura do Paciente</h2>
 
-    <img src="<?= __DIR__ ?>/../../assets/components/footer.png" alt="" id="footer">
+                </td>
+            </tr>
+
+        </table>
+    </main>
+
+    <footer>
+        <img src="<?= __DIR__ . '/../../assets/components/footer.png' ?>" alt="" id="footer">
+    </footer>
 
 
 </body>

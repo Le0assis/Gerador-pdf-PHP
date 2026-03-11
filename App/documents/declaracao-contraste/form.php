@@ -1,14 +1,4 @@
-<?php 
-require __DIR__ . "/../../assets/components/signature.php";
 
-$signature = new Signature("signature.php");
-$base64 = $_POST["signature"];
-$path = $signature->save($base64);
-echo("".$path);
-
-?>
-
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -60,37 +50,38 @@ echo("".$path);
         </form>
     </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        console.log("PQP");
-        try {
-            secondaryScreen(
-                "btnAssinar",
-                "canvas",
-                "step1",
-                "step2",
-                "form",
-                "signature"
-            );
-        } catch (error) {
-            console.error("Um erro ocorreu: ", error)
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            try {
+                secondaryScreen(
+                    "btnAssinar",
+                    "canvas",
+                    "step1",
+                    "step2",
+                    "form",
+                    "signature"
+                );
+            } catch (error) {
+                console.error("Um erro ocorreu: ", error)
 
-        }
-    });
+            }
+            // document.querySelector("form").addEventListener("submit", function(event) {
 
-    document.querySelector("form").addEventListener("submit", function() {
-    
-    if(canvas.toDataURL() === blankCanvas.toDataURL()) {
-        alert("Por favor, forneça uma assinatura antes de enviar o formulário.");
-        event.preventDefault();
-        return false;
-    }
-    let canvas = document.getElementById("canvas");
+            //     if (canvas.toDataURL() === blankCanvas.toDataURL()) {
+            //         alert("Por favor, forneça uma assinatura antes de enviar o formulário.");
+            //         event.preventDefault();
+            //         return false;
+            //     }
+            //     let canvas = document.getElementById("canvas");
 
-    let base64 = canvas.toDataURL("image/png");
+            //     let base64 = canvas.toDataURL("image/png");
 
-    document.getElementById("signature").value = base64;
+            //     document.getElementById("signature").value = base64;
 
-    });
-</script>
+            // });
+        });
+    </script>
+
+</body>
+</html>
 

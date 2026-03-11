@@ -1,10 +1,12 @@
 
 <?php
-
-
+require __DIR__ . "/assets/components/signature.php";
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 $mpdf = new \Mpdf\Mpdf();
 // $mpdf = new \Mpdf\Mpdf();
 $css = file_get_contents(__DIR__ . "/assets/style/test.css");
+$pdfCss = file_get_contents(__DIR__ . "/assets/style/pdf.css");
 $js =  file_get_contents(__DIR__ . "/assets/signature.js");
 
 
@@ -40,19 +42,23 @@ $app->get('/documents/{type}', function ($request, $response, $args) use ($css, 
     ob_start();
     require $template;
     $html = ob_get_clean();
-    $html .="<style>$css</style>"; 
-    $html .="<script>$js</script>";
+    $html .= "<style>$css</style>";
+    $html .= "<script>$js</script>";
     $response->getBody()->write($html);
 
     return $response;
 });
 
-$app->post("/gerar/{type}", function ($request, $response, $args) use ($mpdf, $css) {
+$app->post("/gerar/{type}", function ($request, $response, $args) use ($mpdf, $pdfCss) {
 
     $mpdf = new \Mpdf\Mpdf([
         'format' => 'A4',
-        'debug' => true,
-        'showImageErrors' => true
+        'margin_top' => 20,
+        'margin_bottom' => 20,
+        'margin_left' => 10,
+        'margin_right' => 10,
+        // 'debug' => true,
+        // 'showImageErrors' => true
     ]);
 
     $type = $args['type'];
@@ -65,16 +71,26 @@ $app->post("/gerar/{type}", function ($request, $response, $args) use ($mpdf, $c
 
     $html = ob_get_clean();
     try {
+        $signature = new Signature(path: __DIR__ . "/assets/components");
+        $base64 = $data["signature"];
+        $signature->save($base64);
         $name = $data['name'];
-        $mpdf->WriteHTML($css, \Mpdf\HTMLParserMode::HEADER_CSS);
+        while (ob_get_level()) {
+            ob_end_clean();
+        }
+        $mpdf->WriteHTML($pdfCss, \Mpdf\HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
+
 
         $mpdf->Output("$name.pdf", "I");
     } catch (\Mpdf\MpdfException $e) {
+        echo $e->getMessage();
         echo ($html);
-        $mpdf->Output($e->getMessage());
     }
-    });
+
+    return $response;
+});
+
 
 
 
