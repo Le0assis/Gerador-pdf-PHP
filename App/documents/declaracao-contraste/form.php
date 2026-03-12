@@ -65,23 +65,8 @@
                 console.error("Um erro ocorreu: ", error)
 
             }
-            // document.querySelector("form").addEventListener("submit", function(event) {
-
-            //     if (canvas.toDataURL() === blankCanvas.toDataURL()) {
-            //         alert("Por favor, forneça uma assinatura antes de enviar o formulário.");
-            //         event.preventDefault();
-            //         return false;
-            //     }
-            //     let canvas = document.getElementById("canvas");
-
-            //     let base64 = canvas.toDataURL("image/png");
-
-            //     document.getElementById("signature").value = base64;
-
-            // });
         });
     </script>
 
 </body>
 </html>
-

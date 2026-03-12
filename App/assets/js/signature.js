@@ -72,7 +72,21 @@ function secondaryScreen(btnID, canvasID, step1ID, step2ID, form, signature){
             startSignature(canvasID, form, signature)
         })
     }
-
-
 }
 
+
+function changeStep(currentStepID, nextStepID){
+    
+    const canvas = document.getElementById("canvas");
+
+    document.getElementById(currentStepID).style.display = "none";
+    document.getElementById(nextStepID).style.display = "block";
+    
+    if(canvas){
+
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+
+        startSignature("canvas", "form", "signature");
+    }
+}

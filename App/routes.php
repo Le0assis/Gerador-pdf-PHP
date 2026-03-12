@@ -7,7 +7,8 @@ $mpdf = new \Mpdf\Mpdf();
 // $mpdf = new \Mpdf\Mpdf();
 $css = file_get_contents(__DIR__ . "/assets/style/test.css");
 $pdfCss = file_get_contents(__DIR__ . "/assets/style/pdf.css");
-$js =  file_get_contents(__DIR__ . "/assets/signature.js");
+$pdfJs =  file_get_contents(__DIR__ . "/assets/js/signature.js");
+$js = file_get_contents(__DIR__ . "/assets/js/utils.js") . $pdfJs;
 
 
 // var_dump($js);
@@ -25,9 +26,8 @@ $app->get("/", function ($request, $response) {
     return $response;
 });
 
-$app->get('/documents/{type}', function ($request, $response, $args) use ($css, $js) {
+$app->get('/documents/{type}', function ($request, $response, $args) use ($js) {
 
-    echo ("PASSOU");
     $type = $args['type'];
 
     $template = __DIR__ . "/documents/$type/form.php";
@@ -42,14 +42,14 @@ $app->get('/documents/{type}', function ($request, $response, $args) use ($css, 
     ob_start();
     require $template;
     $html = ob_get_clean();
-    $html .= "<style>$css</style>";
+    // $html .= "<style>$css</style>";
     $html .= "<script>$js</script>";
     $response->getBody()->write($html);
 
     return $response;
 });
 
-$app->post("/gerar/{type}", function ($request, $response, $args) use ($mpdf, $pdfCss) {
+$app->post("/gerar/{type}", function ($request, $response, $args) use ($pdfCss) {
 
     $mpdf = new \Mpdf\Mpdf([
         'format' => 'A4',
@@ -71,7 +71,7 @@ $app->post("/gerar/{type}", function ($request, $response, $args) use ($mpdf, $p
 
     $html = ob_get_clean();
     try {
-        $signature = new Signature(path: __DIR__ . "/assets/components");
+        $signature = new Signature( __DIR__ . "/assets/components");
         $base64 = $data["signature"];
         $signature->save($base64);
         $name = $data['name'];
