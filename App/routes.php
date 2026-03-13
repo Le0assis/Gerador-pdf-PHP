@@ -57,13 +57,15 @@ $app->post("/gerar/{type}", function ($request, $response, $args) use ($pdfCss) 
         'margin_bottom' => 20,
         'margin_left' => 10,
         'margin_right' => 10,
-        // 'debug' => true,
-        // 'showImageErrors' => true
+        'debug' => true,
+        'showImageErrors' => true
     ]);
 
     $type = $args['type'];
     $data = $request->getParsedBody();
-    extract($data);
+    // var_dump($data);
+    // extract($data);
+    // echo "Nome: " . $data['nome'];
     $document = __DIR__ . "/documents/$type/pdf.php";
 
     ob_start();
@@ -74,7 +76,7 @@ $app->post("/gerar/{type}", function ($request, $response, $args) use ($pdfCss) 
         $signature = new Signature( __DIR__ . "/assets/components");
         $base64 = $data["signature"];
         $signature->save($base64);
-        $name = $data['name'];
+        $name = $data['nome'];
         while (ob_get_level()) {
             ob_end_clean();
         }

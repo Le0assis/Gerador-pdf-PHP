@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <td class="td-text">
-                    <p>Eu <?= $name ?> declaro que fui submetido(a) ao
+                    <p>Eu <?= $data['nome'] ?> declaro que fui submetido(a) ao
                         exame de imagem, com uso de contraste, conforme solicitação médica.
                         Estou ciente que, de acordo com as condutas médicas e protocolos de radiologia, além do
                         médico solicitante, também é de responsabilidade do médico radiologista indicar a

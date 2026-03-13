@@ -106,24 +106,24 @@ label input[type="radio"]{
             <div class="grid">
                 <label>
                     Nome:
-                    <input type="text" id="nome" name="name">
+                    <input type="text" id="nome" name="nome">
                 </label>
 
                 <label>
                     Idade:
-                    <input type="number" id="idade" name="age">
+                    <input type="number" id="idade" name="idade">
                 </label>
 
                 <label>
                     Peso:
-                    <input type="number" id="peso" name="weight">
+                    <input type="number" id="peso" name="peso">
                 </label>
             </div>
 
             <div>
                 <label>
                     1. Motivo do exame e início da sintomatologia:
-                    <textarea id="motivo_exame" name="question1"></textarea>
+                    <textarea id="motivo_exame" name="motivo_exame"></textarea>
                 </label>
             </div>
 
@@ -137,14 +137,14 @@ label input[type="radio"]{
                 <label>3. Teve convulsões?</label>
 
                 <label>
-                    <input type="radio" name="convulsions" value="sim" onclick="toggleMenu('convulsionsMenu', this.value)"> Sim
+                    <input type="radio" name="convulsoes" value="sim" onclick="toggleMenu('convulsoesMenu', this.value)"> Sim
                 </label>
                 <label>
-                    <input type="radio" name="convulsions" value="nao" onclick="toggleMenu('convulsionsMenu', this.value)"> Não
+                    <input type="radio" name="convulsoes" value="nao" onclick="toggleMenu('convulsoesMenu', this.value)"> Não
                 </label>
             </div>
             <!-- style="display: none;" -->
-            <div id="convulsionsMenu" style="display: none;">
+            <div id="convulsoesMenu" style="display: none;">
                 <p>Percebe quando vai ter a crise? </p>
                 <input type="text" name="percepcao_crise">
 

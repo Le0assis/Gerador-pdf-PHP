@@ -8,145 +8,160 @@
     <title>Anamnese</title>
 </head>
 <style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f4f6f8;
+        margin: 0;
+        padding: 40px;
+    }
 
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color:#f4f6f8;
-    margin:0;
-    padding:40px;
-}
+    form {
+        background: white;
+        max-width: 900px;
+        margin: auto;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
 
-form{
-    background:white;
-    max-width:900px;
-    margin:auto;
-    padding:30px;
-    border-radius:8px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
-}
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 
-h1{
-    text-align:center;
-    margin-bottom:30px;
-}
+    div {
+        margin-bottom: 18px;
+    }
 
-div{
-    margin-bottom:18px;
-}
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
 
-label{
-    font-weight:bold;
-    display:block;
-    margin-bottom:5px;
-}
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
 
-input[type="text"],
-input[type="number"],
-input[type="date"],
-textarea{
-    width:100%;
-    padding:8px;
-    border:1px solid #ccc;
-    border-radius:4px;
-    font-size:14px;
-}
+    textarea {
+        min-height: 70px;
+        resize: vertical;
+    }
 
-textarea{
-    min-height:70px;
-    resize:vertical;
-}
+    input[type="radio"],
+    input[type="checkbox"] {
+        margin-right: 6px;
+    }
 
-input[type="radio"],
-input[type="checkbox"]{
-    margin-right:6px;
-}
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
 
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:10px;
-}
+    td {
+        padding: 6px;
+        vertical-align: top;
+    }
 
-td{
-    padding:6px;
-    vertical-align:top;
-}
+    button {
+        background: #2c7be5;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-button{
-    background:#2c7be5;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    font-size:16px;
-    border-radius:5px;
-    cursor:pointer;
-}
+    button:hover {
+        background: #1a68d1;
+    }
 
-button:hover{
-    background:#1a68d1;
-}
-td input[type="checkbox"]{
-    margin-right:8px;
-}
-label input[type="radio"]{
-    margin-right:5px;
-}
-.grid{
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr;
-    gap:15px;
-}
+    td input[type="checkbox"] {
+        margin-right: 8px;
+    }
 
+    label input[type="radio"] {
+        margin-right: 5px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 15px;
+    }
 </style>
+
 <body>
-            <h1>Anamnese Crânio</h1>
+    <h1>Anamnese Crânio</h1>
 
-            <div class="grid">
-                <label>
-                    Nome: <?= $nome ?>
-                </label>
-                <label>
-                    Idade: <?= $idade ?>
-                </label>
-                <label>
-                    Peso: <?= $peso ?>
-                </label>
-            </div>
+    <div class="grid">
+        <label>
+            Nome: <?=$data['nome']?>
+        </label>
+        <label>
+            Idade: <?=$data['idade']?>
+        </label>
+        <label>
+            Peso: <?=$data['peso']?>
+        </label>
+    </div>
 
-            <div>
-                <label>
-                    1. Motivo do exame e início da sintomatologia: <?= $motivo_exame ?>
-                </label>
-            </div>
-            <div>
-                <label>
-                    2. Se cefaleia, qual a localização, o tipo da dor e a duração? 
-                    <br>
-                    <?= $cefaleia ?>
-                </label>
-            </div>
-            <div>
-                <label>3. Teve convulsões?</label>
-             <?php if($convulsions == "sim"): ?>
+    <div>
+        <label>
+            1. Motivo do exame e início da sintomatologia: <?=$data['motivo_exame']?>
+        </label>
+    </div>
+    <div>
+        <label>
+            2. Se cefaleia, qual a localização, o tipo da dor e a duração?
+            <br>
+            <?= $data['cefaleia']?>
+        </label>
+    </div>
+    <div>
+        <label>3. Teve convulsões?</label>
+        <?php if ($data['convulsoes'] == "sim"): ?>
 
-                <label>Convulsões: Sim</label>
+            <label>Convulsões: Sim</label>
 
-                <label>
-                Percebe quando vai ter a crise? <?= $percepcao_crise ?>
-                </label>
+            <label>
+                Percebe quando vai ter a crise? <?= $data['percepcao_crise'] ?>
+            </label>
 
-                <label>
+            <label>
                 Alguém testemunhou a crise?
-                </label>
+            </label>
 
-                <label>
-                <?= $testemunha_crise ?>
-                </label>
+            <label>
+                <?= $data['testemunha_crise'] ?>
+            </label>
 
-                <?php endif; ?>
-            </div>
-            <!-- style="display: none;" -->
-            <div id="convulsionsMenu" style="display: none;">
+        <?php endif; ?>
+    </div>
+    <div>
+        <?php foreach ($data['sintomas'] as $sintoma): ?>
+            <label>
+                <input type="checkbox" name="sintomas[]" value="<?= $sintoma ?>" <?= in_array($sintoma, $data['sintomas']) ? 'checked' : '' ?>>
+                <?= $sintoma ?>
+            </label>
+        <?php endforeach; ?>
+    </div>
+    <div>
+        <label >5. Medicamentos em uso:</label>
+        <label><?=$data['medicamentos']?></label>
+    </div>
+
+    <!-- style="display: none;"
+            <div id="convulsoesMenu" style="display: none;">
                 <p>Percebe quando vai ter a crise? </p>
                 <input type="text" name="percepcao_crise">
 
@@ -225,7 +240,7 @@ label input[type="radio"]{
                     <input type="radio" name="criancas" onclick="toggleMenu('childrenMenu', this.value)"> Não
                 </label>
             </div>
-            <!-- style="display: none;" -->
+            
             <div id="childrenMenu" style="display: none;">
                 <p>Gestação nomral?Complicações? </p>
                 <input type="text" name="gestacao">
@@ -312,10 +327,10 @@ label input[type="radio"]{
                     </strong>
                 </label>
             </div>
+ -->
 
 
 
-        
 
 </body>
 

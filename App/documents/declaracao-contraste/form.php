@@ -16,7 +16,7 @@
                 <h2>Entrevista</h2>
 
                 Nome:
-                <input type="text" name="name" required>
+                <input type="text" name="nome" required>
                 <p>"Eu ___________ declaro que fui submetido(a) ao
                     exame de imagem, com uso de contraste, conforme solicitação médica.
                     Estou ciente que, de acordo com as condutas médicas e protocolos de radiologia, além do
@@ -26,7 +26,7 @@
                 </p>
                 <br><br>
 
-                <button type="button" id="btnAssinar">
+                <button type="button" onclick="changeStep('step1', 'step2')" id="btnAssinar">
                     Ir para assinatura
                 </button>
             </div>
@@ -44,29 +44,14 @@
                 <button type="submit">
                     Finalizar e Gerar PDF
                 </button>
+                <button type="button" onclick="changeStep('step2', 'step1')">
+                    Voltar
+                </button>
 
             </div>
 
         </form>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            try {
-                secondaryScreen(
-                    "btnAssinar",
-                    "canvas",
-                    "step1",
-                    "step2",
-                    "form",
-                    "signature"
-                );
-            } catch (error) {
-                console.error("Um erro ocorreu: ", error)
-
-            }
-        });
-    </script>
 
 </body>
 </html>
