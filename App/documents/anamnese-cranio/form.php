@@ -7,97 +7,7 @@
     <script src='https://cdn.jsdelivr.net/npm/signature_pad'></script>
     <title>Anamnese</title>
 </head>
-<style>
 
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color:#f4f6f8;
-    margin:0;
-    padding:40px;
-}
-
-form{
-    background:white;
-    max-width:900px;
-    margin:auto;
-    padding:30px;
-    border-radius:8px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
-}
-
-h1{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-div{
-    margin-bottom:18px;
-}
-
-label{
-    font-weight:bold;
-    display:block;
-    margin-bottom:5px;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="date"],
-textarea{
-    width:100%;
-    padding:8px;
-    border:1px solid #ccc;
-    border-radius:4px;
-    font-size:14px;
-}
-
-textarea{
-    min-height:70px;
-    resize:vertical;
-}
-
-input[type="radio"],
-input[type="checkbox"]{
-    margin-right:6px;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:10px;
-}
-
-td{
-    padding:6px;
-    vertical-align:top;
-}
-
-button{
-    background:#2c7be5;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    font-size:16px;
-    border-radius:5px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#1a68d1;
-}
-td input[type="checkbox"]{
-    margin-right:8px;
-}
-label input[type="radio"]{
-    margin-right:5px;
-}
-.grid{
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr;
-    gap:15px;
-}
-
-</style>
 <body>
     <div id="step1">
         <form id="form" action="/gerar/anamnese-cranio" method="POST">
@@ -116,7 +26,7 @@ label input[type="radio"]{
 
                 <label>
                     Peso:
-                    <input type="number" id="peso" name="peso">
+                    <input type="number" id="peso" name="peso" step="any">
                 </label>
             </div>
 
@@ -145,20 +55,20 @@ label input[type="radio"]{
             </div>
             <!-- style="display: none;" -->
             <div id="convulsoesMenu" style="display: none;">
-                <p>Percebe quando vai ter a crise? </p>
+                <label>Percebe quando vai ter a crise? </label>
                 <input type="text" name="percepcao_crise">
 
-                <p>Alguém testemunhou a crise? Se positivo, descrevê-la desde início.
-                    (Qual membro flexiona? com qual mão se recompõe ou enxuga o rosto após a crise?)</p>
+                <label>Alguém testemunhou a crise? Se positivo, descrevê-la desde início.
+                    (Qual membro flexiona? com qual mão se recompõe ou enxuga o rosto após a crise?)</label>
                 <textarea name="testemunha_crise"></textarea>
 
-                <p>Quantas crises apresentou no último mês? </p>
+                <label>Quantas crises apresentou no último mês? </label>
                 <input type="number" name="qtd_ultimo_mes" placeholder="Ex: 3">
 
-                <p>Há aumento da freqüência das crises? Quanto? </p>
+                <label>Há aumento da freqüência das crises? Quanto? </label>
                 <input type="text" name="frequencia_crises">
 
-                <p>Fez (trouxe) ECG? </p>
+                <label>Fez (trouxe) ECG? </label>
                 <input type="text" name="ECG">
             </div>
             <div>
@@ -219,17 +129,17 @@ label input[type="radio"]{
             <div>
                 <label>
                     8. Paciente é criança ou teve filhos?
-                    <input type="radio" name="criancas" onclick="toggleMenu('childrenMenu', this.value)"> Sim
-                    <input type="radio" name="criancas" onclick="toggleMenu('childrenMenu', this.value)"> Não
+                    <input type="radio" name="criancas" onclick="toggleMenu('childrenMenu', this.value)" value="sim"> Sim
+                    <input type="radio" name="criancas" onclick="toggleMenu('childrenMenu', this.value)" value="nao"> Não
                 </label>
             </div>
             <!-- style="display: none;" -->
             <div id="childrenMenu" style="display: none;">
-                <p>Gestação nomral?Complicações? </p>
+                <label>Gestação nomral? Complicações? </label>
                 <input type="text" name="gestacao">
-                <p>Parto nomral? </p>
+                <label>Parto nomral? </label>
                 <input type="text" name="parto">
-                <p>Atraso no desenvolvimento? </p>
+                <label>Atraso no desenvolvimento? </label>
                 <input type="text" name="atraso_desenvolvimento">
             </div>
             <div>
@@ -282,21 +192,24 @@ label input[type="radio"]{
                         </td>
                         <td>
                             <label>IR: 
-                                <input type="radio" name="IR" value="sim" onchange="toggleRequired()">
+                                <input type="radio" name="IR" value="sim" onchange="toggleRequired('IR_descricao', this.value)">
                                 Sim
-                                <input type="radio" name="IR" value="nao" onchange="toggleRequired()">
+                                <input type="radio" name="IR" value="nao" onchange="toggleRequired('IR_descricao', this.value)">
                                 Não
                             </label>
-                            <input type="text" id="IR_descricao" placeholder="Descreva a IR" name="IR_descricao" style="display: none;">
+                         
+                                <input type="text" id="IR_descricao" placeholder="Descreva a IR" name="IR_descricao" style="Display: none;">
+               
+
                         </td>
                     </tr>
                 </table>
             </div>
             <div>
-                <p><strong>
+                <label><strong>
                         Autorizo compartilhar, se necessário, as imagens do meu exame, bem como minhas informações clinicas,
                         caso necessite de uma opinião de serviço de telerradiologia para auxiliar no meu diagnóstico.
-                    </strong></p>
+                    </strong></label>
                 <label>
                     <strong>
                         <input type="radio" name="autorizacao" value="sim">

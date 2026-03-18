@@ -45,62 +45,107 @@ function startSignature(canvasId, formId, inputHiddenId){
 
 }
 
+// function startSignature(canvasId, formId, inputHiddenId){
+
+//     const canvas = document.getElementById(canvasId);
+
+//     // recalcula tamanho
+//     const ratio = Math.max(window.devicePixelRatio || 1, 1);
+
+//     canvas.width = canvas.offsetWidth * ratio;
+//     canvas.height = canvas.offsetHeight * ratio;
+
+//     canvas.getContext("2d").scale(ratio, ratio);
+
+//     // destrói assinatura anterior
+//     if(signaturePad){
+//         signaturePad.off();
+//     }
+
+//     signaturePad = new SignaturePad(canvas);
+
+//     canvas.tabIndex = 0;
+
+//     canvas.addEventListener("click", function() {
+//         canvas.focus();
+//     });
+
+    
+//     canvas.addEventListener("focus", function() {
+//         signatureOn = true;
+//         canvas.style.border = "2px solid blue";
+//     });
+
+//     canvas.addEventListener("blur", function(e){
+
+//         signatureOn = false;
+//         canvas.style.border = "1px solid black";
+//     });
+//     canvas.addEventListener("keydown", function(event){
+
+//     if (event.code === "Space") {
+//         event.preventDefault();
+//         signaturePad.clear();
+//     }
+//     if (event.code === "Enter") {
+//         event.preventDefault();
+//         canvas.blur();
+//     }
+// })
+//     document.getElementById(formId).addEventListener("submit", function() {
+
+//         if (!signaturePad.isEmpty()) {
+//             const dataURL = signaturePad.toDataURL();
+//             document.getElementById(inputHiddenId).value = dataURL;
+//         }
+
+//     });
+
+// }
+let signaturePad = null;
+
 function startSignature(canvasId, formId, inputHiddenId){
 
     const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext("2d");
 
-    // recalcula tamanho
-    const ratio = Math.max(window.devicePixelRatio || 1, 1);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    canvas.width = canvas.offsetWidth * ratio;
-    canvas.height = canvas.offsetHeight * ratio;
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
 
-    canvas.getContext("2d").scale(ratio, ratio);
+    if (canvas.width === 0 || canvas.height === 0) {
+    console.log("Canvas ainda não visível ", canvas.width, canvas.height);
+    return;
+}
 
-    // destrói assinatura anterior
-    if(signaturePad){
+    if (signaturePad) {
         signaturePad.off();
     }
 
     signaturePad = new SignaturePad(canvas);
 
-    canvas.tabIndex = 0;
+    signaturePad.clear();
 
-    canvas.addEventListener("click", function() {
-        canvas.focus();
-    });
+    canvas.onclick = () => canvas.focus();
 
-    
-    canvas.addEventListener("focus", function() {
-        signatureOn = true;
-        canvas.style.border = "2px solid blue";
-    });
-
-    canvas.addEventListener("blur", function(e){
-
-        signatureOn = false;
-        canvas.style.border = "1px solid black";
-    });
-    canvas.addEventListener("keydown", function(event){
-
-    if (event.code === "Space") {
-        event.preventDefault();
-        signaturePad.clear();
-    }
-    if (event.code === "Enter") {
-        event.preventDefault();
-        canvas.blur();
-    }
-})
-    document.getElementById(formId).addEventListener("submit", function() {
-
-        if (!signaturePad.isEmpty()) {
-            const dataURL = signaturePad.toDataURL();
-            document.getElementById(inputHiddenId).value = dataURL;
+    canvas.onkeydown = (event) => {
+        if (event.code === "Space") {
+            event.preventDefault();
+            signaturePad.clear();
         }
+        if (event.code === "Enter") {
+            event.preventDefault();
+            canvas.blur();
+        }
+    };
 
-    });
-
+    document.getElementById(formId).onsubmit = function () {
+        if (!signaturePad.isEmpty()) {
+            document.getElementById(inputHiddenId).value =
+                signaturePad.toDataURL();
+        }
+    };
 }
 
 
@@ -125,10 +170,9 @@ function secondaryScreen(btnID, canvasID, step1ID, step2ID, form, signature){
 
             step2.style.display = "block";
 
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
-
-            startSignature(canvasID, form, signature)
+        setTimeout(() => {
+            startSignature(canvasID, form, signature);
+        }, 50);
         })
     }
 }
@@ -142,10 +186,19 @@ function changeStep(currentStepID, nextStepID){
     document.getElementById(nextStepID).style.display = "block";
     
     if(canvas){
-
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-
         startSignature("canvas", "form", "signature");
     }
 }
+
+function toggleRequired(inputId, $value){
+    
+    const input = document.getElementById(inputId);
+    if($value === "sim"){
+        input.style.display = "block";
+        input.required = true;
+    } else {
+        input.style.display = "none";
+        input.required = false;
+    }   
+}
+

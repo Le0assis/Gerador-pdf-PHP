@@ -7,9 +7,7 @@
 </head>
 
 <body>
-    <header>
-        <img src="<?= __DIR__ . '/../../assets/components/header.png' ?>" alt="" id="header">
-    </header>
+
 
     <main>
         <table>
@@ -56,9 +54,6 @@
         </table>
     </main>
 
-    <footer>
-        <img src="<?= __DIR__ . '/../../assets/components/footer.png' ?>" alt="" id="footer">
-    </footer>
 
 
 </body>

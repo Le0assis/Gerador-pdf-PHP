@@ -10,7 +10,8 @@
     <?php
         $data = [
             'declaracao-contraste' => "Declaração de Contraste",
-            'anamnese-cranio' => 'Anamnese Cranio'
+            'anamnese-cranio' => 'Anamnese Cranio',
+            'anamnese-face' => 'Anamnese Face'
         ];
     ?>
     <div class="cards-container">
