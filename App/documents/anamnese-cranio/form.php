@@ -245,12 +245,6 @@
         
     </form>
 
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            teste()
-        });
-    </script>
 </body>
 
 </html>
