@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -7,154 +7,129 @@
 </head>
 
 <body>
-    
-    <div>
+
+    <div class="a4-container">
+
+        <div class="header">
+            <div>
+                <h1>Anamnese de Crânio</h1>
+                <small>Unimagem - Diagnóstico por Imagem</small>
+            </div>
+            <div style="text-align: right; color: #999;">Data: <?= date('d/m/Y') ?></div>
+        </div>
+
         <table>
             <tr>
                 <td>
-                    <p><strong>Nome: </strong></p>
-                    <p><?= $data['nome'] ?></p>
+                    <span class="label">Nome:</span>
+                    <div class="response"><?= $data['nome'] ?></div>
                 </td>
                 <td>
-                    <p><strong>Idade: </strong></p>
-                    <p><?= $data['idade'] ?></p>
+                    <span class="label">Idade:</span>
+                    <div class="response"><?= $data['idade'] ?></div>
                 </td>
                 <td>
-                    <p><strong>Peso: </strong></p>
-                    <p><?= $data['peso'] ?></p>
+                    <span class="label">Peso:</span>
+                    <div class="response"><?= $data['peso'] ?></div>
                 </td>
             </tr>
         </table>
-    </div>
 
-    <div>
-        <p><strong>1. Motivo do exame e início da sintomatologia:</strong></p>
-        <p><?= $data['motivo_exame'] ?></p>
-    </div>
+        <div class="section-box">
+            <span class="label">1. Motivo do exame e início da sintomatologia:</span>
+            <div class="response"><?= nl2br($data['motivo_exame']) ?></div>
+        </div>
 
-    <div>
-        <p><strong>2. Se cefaleia, qual a localização, o tipo da dor e a duração?</strong></p>
-        <p><?= $data['cefaleia'] ?></p>
-    </div>
+        <div class="section-box">
+            <span class="label">2. Se cefaleia, qual a localização, o tipo da dor e a duração?</span>
+            <div class="response"><?= nl2br($data['cefaleia']) ?></div>
+        </div>
 
-    <div>
-        <p><strong>3. Teve convulsões?</strong></p>
+        <div class="section-box">
+            <span class="label">3. Teve convulsões?</span>
+            <div class="response">
+                <?php if ($data['convulsoes'] == "sim"): ?>
+                    <strong>Sim</strong><br>
+                    <strong>Percebe quando vai ter a crise?</strong> <?= $data['percepcao_crise'] ?><br>
+                    <strong>Alguém testemunhou a crise?</strong> <?= $data['testemunha_crise'] ?>
+                <?php else: ?>
+                    Não
+                <?php endif; ?>
+            </div>
+        </div>
 
-        <?php if ($data['convulsoes'] == "sim"): ?>
+        <div class="section-box">
+            <span class="label">4. Sintomas:</span>
+            <div class="response">
+                <?php foreach ($data['sintomas'] as $sintoma): ?>
+                    <span class="checkbox-row">
+                        <input type="checkbox" checked disabled> <?= ucfirst(str_replace('_', ' ', $sintoma)) ?>
+                    </span>
+                <?php endforeach; ?>
 
-            <p>Sim</p>
+                <?php if (in_array("outros", $data['sintomas'])): ?>
+                    <div style="margin-top: 5px;">
+                        <strong>Outros sintomas:</strong> <?= $data['outros_sintomas'] ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
 
-            <p><strong>Percebe quando vai ter a crise?</strong></p>
-            <p><?= $data['percepcao_crise'] ?></p>
+        <div class="section-box">
+            <span class="label">5. Medicamentos em uso:</span>
+            <div class="response"><?= $data['medicamentos'] ?></div>
+        </div>
 
-            <p><strong>Alguém testemunhou a crise?</strong></p>
-            <p><?= $data['testemunha_crise'] ?></p>
+        <div class="section-box">
+            <span class="label">6. Já fez cirurgias na cabeça? Quais e quantas?</span>
+            <div class="response"><?= $data['cirurgias_cabeca'] ?></div>
+        </div>
 
-        <?php else: ?>
-            <p>Não</p>
-        <?php endif; ?>
-    </div>
+        <div class="section-box">
+            <span class="label">7. Já foi submetido a Radio ou Quimioterapia?</span>
+            <div class="response"><?= $data['radio_quimioterapia'] ?></div>
+        </div>
 
-    <div>
-        <?php foreach ($data['sintomas'] as $sintoma): ?>
-            <p>
-                <input type="checkbox" <?= in_array($sintoma, $data['sintomas']) ? 'checked' : '' ?>>
-                <?= $sintoma ?>
-            </p>
-        <?php endforeach; ?>
-
-        <?php if (in_array("outros", $data['sintomas'])): ?>
-            <p><strong>Outros sintomas:</strong></p>
-            <p><?= $data['outros_sintomas'] ?></p>
-        <?php endif; ?>
-    </div>
-
-    <div>
-        <p><strong>5. Medicamentos em uso:</strong></p>
-        <p><?= $data['medicamentos'] ?></p>
-    </div>
-
-    <div>
-        <p><strong>6. Já fez cirurgias na cabeça? Quais e quantas?</strong></p>
-        <p><?= $data['cirurgias_cabeca'] ?></p>
-    </div>
-
-    <div>
-        <p><strong>7. Já foi submetido a Radio ou Quimioterapia? Há quanto tempo e em que local?</strong></p>
-        <p><?= $data['radio_quimioterapia'] ?></p>
-    </div>
-
-    <div>
-        <p><strong>8. Paciente é criança ou teve filhos?</strong></p>
-
-        <?php if ($data['criancas'] == "sim"): ?>
-            <p>Sim</p>
-
-            <p><strong>Gestação normal? Complicações?</strong></p>
-            <p><?= $data['gestacao'] ?></p>
-
-            <p><strong>Parto normal? </strong></p>
-            <p><?= $data['parto'] ?></p>
-
-            <p><strong>Atraso no desenvolvimento? </strong></p>
-            <p><?= $data['atraso_desenvolvimento'] ?></p>
-
-        <?php else: ?>
-            <p>Não</p>
-        <?php endif; ?>
-    </div>
-
-    <div>
-        <table>
-            <tr>
-                <td>
-                    <p><strong>Creatina Sérica: </strong></p>
-                    <p><?= $data['creatina_serica'] ?></p>
-                </td>
-                <td>
-                    <p><strong>Data realizada: </strong></p>
-                    <p><?= $data['data'] ?></p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p><strong>Suspeita de gravidez: </strong></p>
-                </td>
-                <td>
-                    <p><?= $data['suspeita_gravidez'] ?></p>
-                </td>
-
-            </tr>
-            <tr>
-                <td>
-                    <p><strong>Alergias: </strong></p>
-                    <p><?= $data['alergias'] ?></p>
-                </td>
-                <td>
-                    <p><strong>Doença base: </strong></p>
-                    <p><?= $data['doenca_base'] ?></p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p><strong>Asma: </strong></p>
-                    <p><?= $data['asma'] ?></p>
-                </td>
-                <td>
-                    <p><strong>IR: </strong></p>
-                    <p><?= $data['IR_descricao'] ?></p>
-                </td>
-            </tr>
-
-        </table>
+        <div class="section-box">
+            <span class="label">8. Paciente é criança ou teve filhos?</span>
+            <div class="response">
+                <?php if ($data['criancas'] == "sim"): ?>
+                    <strong>Sim</strong><br>
+                    <strong>Gestação:</strong> <?= $data['gestacao'] ?> |
+                    <strong>Parto:</strong> <?= $data['parto'] ?> |
+                    <strong>Atraso desenvolvimento:</strong> <?= $data['atraso_desenvolvimento'] ?>
+                <?php else: ?>
+                    Não
+                <?php endif; ?>
+            </div>
+        </div>
 
 
+            <div class="label">Dados Clínicos e Alergias:</div>
+            <table>
+                <tr>
+                    <td><span class="label">Creatina Sérica:</span> <?= $data['creatina_serica'] ?> (Data: <?= $data['data'] ?>)</td>
+                    <td><span class="label">Suspeita Gravidez:</span> <?= $data['suspeita_gravidez'] ?></td>
+                </tr>
+                <tr>
+                    <td><span class="label">Alergias:</span> <?= $data['alergias'] ?></td>
+                    <td><span class="label">Doença de Base:</span> <?= $data['doenca_base'] ?></td>
+                </tr>
+                <tr>
+                    <td><span class="label">Asma:</span> <?= $data['asma'] ?></td>
+                    <td><span class="label">Insuficiência Renal (IR):</span> <?= $data['IR_descricao'] ?: 'Não' ?></td>
+                </tr>
+            </table>
 
-
-
-    </div>
-
-
+            <div class="label">Autorização de Telerradiologia:</div>
+            <div class="response">
+                O paciente <strong><?= $data['autorizacao'] == 'sim' ? 'AUTORIZA' : 'NÃO AUTORIZA' ?></strong> o compartilhamento de imagens para fins de diagnóstico.
+            </div>
+            <div id="signature-box">
+                <div class="label">Assinatura do Paciente:</div>
+                <img src="<?= $data['signature'] ?>">
+            </div>
+ 
 </body>
 
 </html>

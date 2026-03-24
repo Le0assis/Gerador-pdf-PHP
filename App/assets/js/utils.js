@@ -12,14 +12,19 @@ function toggleMenu(menuId, value) {
 }
 
 function toggleMenuCheckbox(menuId) {
-    const input = document.getElementById(menuId);
-
-    if (!input) {
-        console.error("Elemento não encontrado:", menuId.value);
+    const checkbox = document.querySelector(`input[name="historico_odontologico[]"][value="${menuId}"]`);
+    const menu = document.getElementById(menuId);
+    if (!checkbox) {
+        console.error("Checkbox não encontrado para menuId:", menuId);
         return;
     }
+    if (checkbox.checked) {
+        menu.style.display = "block";
 
-    input.style.display = menuId.checked ? "inline" : "none";
+    } else {
+        menu.style.display = "none";
+
+    }
 }
 
 function toggleTabagismo(value) {

@@ -38,8 +38,8 @@
             <div>
                 <label for="queixa_dor"><strong>2. Há queixa de dor facial? </strong></label>
                 <input type="radio" name="queixa_dor" id="queixa_dor" value="sim" onclick="toggleMenu('menuQueixaDor', this.value)"> Sim
-                <input type="radio" name="queixa_dor" id="queixa_dor" value="nao"> Não
-                <div class="menuQueixaDor">
+                <input type="radio" name="queixa_dor" id="queixa_dor" value="nao" onclick="toggleMenu('menuQueixaDor', this.value)"> Não
+                <div id="menuQueixaDor" style="Display: none;">
                     <table>
                         <tr>
                             <td><label>Local da dor: </label></td>
@@ -54,8 +54,8 @@
                         </tr>
                         <tr>
                             <td><input type="checkbox" name="queixa_dor_locais[]" value="Nasal">Nasal</td>
-                            <td><input type="checkbox" name="queixa_dor_locais[]" value="outro" onclick="toggleMenuCheckbox(this)">Outro
-                                <input type="text" name="queixa_dor_outras[outro]" style="display: none;" id="outro" placeholder="Outras...">
+                            <td><input type="checkbox" name="queixa_dor_locais[]" value="outro">Outro
+                                <input type="text" name="queixa_dor_outras[outro]" placeholder="Outras...">
                             </td>
                         </tr>
                         <tr>
@@ -73,6 +73,7 @@
             </div>
 
             <div>
+                <label><strong>3.  Alguma queixa de:</strong></label>
                 <table>
                     <tr>
                         <!-- Isso aqui ta repetido na 4 fala, fazer menu oblico -->
@@ -81,9 +82,9 @@
                     </tr>
                     <tr>
                     <tr id="menuScrecaoObstrucao">
-                        <td><input type="checkbox" name="screcao_obstrucao_locais[]" value="esquerda">Esquerda</td>
-                        <td><input type="checkbox" name="screcao_obstrucao_locais[]" value="direita">Direita</td>
-                        <td><input type="checkbox" name="screcao_obstrucao_locais[]" value="bilateral">Bilateral</td>
+                        <td><input type="radio" name="screcao_obstrucao_local" value="esquerda">Esquerda</td>
+                        <td><input type="radio" name="screcao_obstrucao_local" value="direita">Direita</td>
+                        <td><input type="radio" name="screcao_obstrucao_local" value="bilateral">Bilateral</td>
                     </tr>
                     </tr>
                 </table>
@@ -119,18 +120,18 @@
                 <table>
                     <tr>
                         <td><input type="checkbox" name="historico_odontologico[]" value="nenhum">Nenhum</td>
-                        <td><input type="checkbox" name="historico_odontologico[]" value="implante" onclick="toggleMenuCheckbox(this)">Implante
+                        <td><input type="checkbox" name="historico_odontologico[]" value="implante" onclick="toggleMenuCheckbox(this.value)">Implante
                             <input type="date" name="historico_odontologico[implante]" id="implante" style="display: none;">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="checkbox" name="historico_odontologico[]" value="extracao" onclick="toggleMenuCheckbox(this)">Extração
+                            <input type="checkbox" name="historico_odontologico[]" value="extracao" onclick="toggleMenuCheckbox(this.value)">Extração
                             <input type="date" name="historico_odontologico[extracao]" id="extracao" style="display: none;">
                         </td>
 
                         <td>
-                            <input type="checkbox" name="historico_odontologico[]" value="canal" onclick="toggleMenuCheckbox(this)">Canal
+                            <input type="checkbox" name="historico_odontologico[]" value="canal" onclick="toggleMenuCheckbox(this.value)">Canal
                             <input type="date" name="historico_odontologico[canal]" id="canal" style="display: none;">
                         </td>
                     </tr>
@@ -166,17 +167,16 @@
 
                     <div id="menu_tabagista" style="display: none;">
                         <label><strong>Quantos maços por dia? </strong></label>
-                        <input type="number" name="tabagista_maços_por_dia" id="maços_por_dia">
+                        <input type="text" name="tabagista_maços_por_dia" id="maços_por_dia" placeholder='Ex: "Tantos" dias'>
 
                         <label><strong>Hà quanto tempo? </strong></label>
-                        <input type="text" name="tabagista_tempo_fumando">
+                        <input type="text" name="tabagista_tempo_fumando" placeholder="Ex: 2 anos">
                     </div>
                     <div id="menu_ex" style="display: none;">
                         <label><strong>Parou hà quanto tempo? </strong></label>
-                        <input type="text" name="exTabagista_tempo_fumando">
-
+                        <input type="text" name="exTabagista_tempo_fumando" placeholder="Ex: 1 ano">
                         <label><strong>Por quanto tempo fumou? </strong></label>
-                        <input type="text" name="exTabagista_quanto_tempo">
+                        <input type="text" name="exTabagista_quanto_tempo" placeholder='Ex: "Tantos" dias'>
                     </div>
                 </div>
                 <div>

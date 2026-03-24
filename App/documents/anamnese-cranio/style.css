@@ -1,133 +1,95 @@
-/* =========================
-   RESET BÁSICO
-========================= */
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f6f8;
+    font-family: 'Helvetica', Arial, sans-serif;
+    background-color: #f4f7f6;
     margin: 0;
-    padding: 40px;
+    padding: 0;
+    color: #333;
+    line-height: 1.4;
 }
 
-
-h1 {
-    text-align: center;
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-
-p {
-    margin: 5px 0;
-    color: red;
-}
-
-input,
-textarea {
-    border: none;
-    border-bottom: 1px solid #000;
-    width: 100%;
-    font-size: 12px;
-}
-
-textarea {
-    resize: none;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-td {
-    border: 1px solid #000;
-    padding: 6px;
-    vertical-align: top;
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-    width: auto;
-    margin-right: 5px;
-}
-
-canvas {
-    border: 1px solid #000;
-    height: 150px;
-    width: 100%;
-}
-
-button {
-    display: none;
-}
-
-/* =========================
-   PADRÃO (fallback fora .form)
-========================= */
-form {
+.a4-container {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 10mm auto;
     background: white;
-    max-width: 900px;
-    margin: auto;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 15mm;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 30px;
+/* Cabeçalho Profissional */
+.header {
+    border-bottom: 2px solid #003366;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
-div {
-    margin-bottom: 18px;
+.header h1 {
+    margin: 0;
+    color: #003366;
+    font-size: 18pt;
+    text-transform: uppercase;
 }
 
-label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="date"],
-textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-textarea {
-    min-height: 70px;
-}
-
+/* Tabelas de Dados */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin-bottom: 15px;
 }
 
 td {
-    padding: 6px;
+    padding: 8px;
+    border: 1px solid #eee;
     vertical-align: top;
 }
 
-button {
-    background: #2c7be5;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
+/* Estilização de Blocos e Textos */
+.section-box {
+    margin-bottom: 15px;
+    page-break-inside: avoid;
 }
 
-button:hover {
-    background: #1a68d1;
+.label {
+    font-weight: bold;
+    color: #003366;
+    font-size: 10pt;
+    display: block;
+    margin-bottom: 3px;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 15px;
+.response {
+    background-color: #f9f9f9;
+    padding: 8px 12px;
+    border-left: 3px solid #ced4da;
+    min-height: 18px;
+    font-size: 10.5pt;
+}
+
+/* Checkboxes e Rodapé */
+.checkbox-row {
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 10pt;
+}
+
+.footer {
+    margin-top: auto;
+    border-top: 1px solid #003366;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8pt;
+    color: #666;
+}
+
+@media print {
+    body { background: none; }
+    .a4-container { margin: 0; box-shadow: none; width: 100%; }
 }
