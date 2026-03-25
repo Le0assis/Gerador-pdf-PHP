@@ -11,7 +11,8 @@
         $data = [
             'declaracao-contraste' => "Declaração de Contraste",
             'anamnese-cranio' => 'Anamnese Cranio',
-            'anamnese-face' => 'Anamnese Face'
+            'anamnese-face' => 'Anamnese Face',
+            'anamnese-atm' => 'Anamnese ATM'
         ];
     ?>
     <div class="cards-container">

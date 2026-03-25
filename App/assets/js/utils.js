@@ -46,3 +46,68 @@ function toggleTabagismo(value) {
         menu.querySelectorAll("input").forEach(input => input.required = true);
     }
 }
+
+
+
+
+const instances = [];
+
+function initPainMarker({ imageId, canvasId, inputId }) {
+
+    const img = document.getElementById(imageId);
+    const canvas = document.getElementById(canvasId);
+    const input = document.getElementById(inputId);
+    const ctx = canvas.getContext("2d");
+
+    let pontos = [];
+
+    function resizeCanvas() {
+        canvas.width = img.clientWidth;
+        canvas.height = img.clientHeight;
+
+        canvas.style.position = "absolute";
+        canvas.style.left = 0;
+        canvas.style.top = 0;
+    }
+
+    img.onload = resizeCanvas;
+    window.addEventListener("resize", resizeCanvas);
+
+    canvas.addEventListener("click", function(e) {
+        const rect = canvas.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        pontos.push({ x, y });
+
+        desenhar();
+        atualizarInput();
+    });
+
+    function desenhar() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        pontos.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 6, 0, 2 * Math.PI);
+            ctx.fillStyle = "red";
+            ctx.fill();
+        });
+    }
+
+    function atualizarInput() {
+        input.value = JSON.stringify(pontos);
+    }
+
+    function removerUltimo() {
+        pontos.pop();
+        desenhar();
+        atualizarInput();
+    }
+
+    // guarda essa instância
+    instances.push({
+        removerUltimo
+    });
+}
