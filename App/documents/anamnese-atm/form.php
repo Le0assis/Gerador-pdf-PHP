@@ -44,8 +44,10 @@
                                 <label>
                                     2. Sente dor?
 
-                                    <input type="radio" name="sente_dor" value="sim" required onclick="toggleRequired('senteDor', this.value)"> Sim
-                                    <input type="radio" name="sente_dor" value="nao" required onclick="toggleRequired('senteDor', this.value)"> Não
+                                    <input type="radio" name="sente_dor" value="sim" required
+                                        onclick="toggleRequired('senteDor', this.value)"> Sim
+                                    <input type="radio" name="sente_dor" value="nao" required
+                                        onclick="toggleRequired('senteDor', this.value)"> Não
                                 </label>
                                 <div>
                         </td>
@@ -65,8 +67,10 @@
                     <label>
                         Você tem limitação de abertura de boca?
 
-                        <input type="radio" name="limitacao_boca" value="sim" required onclick="toggleRequired('limitacaoBoca', this.value)"> Sim
-                        <input type="radio" name="limitacao_boca" value="nao" required onclick="toggleRequired('limitacaoBoca', this.value)"> Não
+                        <input type="radio" name="limitacao_boca" value="sim" required
+                            onclick="toggleRequired('limitacaoBoca', this.value)"> Sim
+                        <input type="radio" name="limitacao_boca" value="nao" required
+                            onclick="toggleRequired('limitacaoBoca', this.value)"> Não
                     </label>
                 </div>
                 <div id="limitacaoBoca" style="Display: none;">
@@ -79,8 +83,10 @@
             <div>
                 <label>
                     4. Você ouve estralos ("clock") quando abre a boca?
-                    <input type="radio" name="estralos" value="sim" required onclick="toggleRequired('estralos', this.value)"> Sim
-                    <input type="radio" name="estralos" value="nao" required onclick="toggleRequired('estralos', this.value)"> Não
+                    <input type="radio" name="estralos" value="sim" required
+                        onclick="toggleRequired('estralos', this.value)"> Sim
+                    <input type="radio" name="estralos" value="nao" required
+                        onclick="toggleRequired('estralos', this.value)"> Não
                 </label>
                 <div style="display: none;" id="estralos">
                     <label for="lado_estralo"> Lado Estralo:
@@ -110,8 +116,10 @@
             </div>
             <div>
                 <label for="mandibulaOperada">8. Já foi operado da mandíbula?
-                    <input type="radio" name="mandibulaOperada" value="sim" onclick="toggleMenu('mandibulaOperadaMenu', this.value)">Sim
-                    <input type="radio" name="mandibulaOperada" value="nao" onclick="toggleMenu('mandibulaOperadaMenu', this.value)">Não
+                    <input type="radio" name="mandibulaOperada" value="sim"
+                        onclick="toggleMenu('mandibulaOperadaMenu', this.value)">Sim
+                    <input type="radio" name="mandibulaOperada" value="nao"
+                        onclick="toggleMenu('mandibulaOperadaMenu', this.value)">Não
                 </label>
                 <div id="mandibulaOperadaMenu" style="display: none;">
                     <label for="detalhesCirurgia">Há quanto tempo? Detalhes da cirurgia:
@@ -121,8 +129,10 @@
             </div>
             <div>
                 <label for="quimioterapia">9. já fez quimioterapia?
-                    <input type="radio" name="quimioterapia" value="sim" onclick="toggleMenu('quimioterapiaTempo', this.value)">Sim
-                    <input type="radio" name="quimioterapia" value="nao" onclick="toggleMenu('quimioterapiaTempo', this.value)">Não
+                    <input type="radio" name="quimioterapia" value="sim"
+                        onclick="toggleMenu('quimioterapiaTempo', this.value)">Sim
+                    <input type="radio" name="quimioterapia" value="nao"
+                        onclick="toggleMenu('quimioterapiaTempo', this.value)">Não
                 </label>
 
                 <div id="quimioterapiaTempo" style="display: none;">
@@ -134,8 +144,10 @@
 
             <div>
                 <label for="quimioterapia">9. já fez radioterapia?
-                    <input type="radio" name="quimioterapia" value="sim" onclick="toggleMenu('radioterapiaTempo', this.value)">Sim
-                    <input type="radio" name="quimioterapia" value="nao" onclick="toggleMenu('radioterapiaTempo', this.value)">Não
+                    <input type="radio" name="quimioterapia" value="sim"
+                        onclick="toggleMenu('radioterapiaTempo', this.value)">Sim
+                    <input type="radio" name="quimioterapia" value="nao"
+                        onclick="toggleMenu('radioterapiaTempo', this.value)">Não
                 </label>
                 <div id="radioterapiaTempo" style="display: none;">
                     <label for="tempoRadioterapia">Há quanto tempo? Detalhes da radioterapia:
@@ -145,42 +157,48 @@
             </div>
 
 
-
-
-
-
-
-
-
-
-
-
-            <div style="display: flex; gap: 20px;">
-
-                <!-- LADO ESQUERDO -->
-                <div style="position: relative;">
-                    <img id="imgLeft" src="../../App/assets/images/anamnese-atm-mandibula-direita.png" width="300">
-                    <canvas id="canvasLeft"></canvas>
-                </div>
-                <input type="hidden" name="dor_esquerda" id="inputLeft">
-
-                <!-- LADO DIREITO -->
-                <div style="position: relative;">
-                    <img id="imgRight" src="/assets/images/anamnese-atm-mandibula-direita.png" width="300">
-                    <canvas id="canvasRight"></canvas>
-                </div>
-                <input type="hidden" name="dor_direita" id="inputRight">
-
+            <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+                <img src="/images/anamnese-atm-mandibula-direita.png" alt="Direita">
+                <img src="/images/anamnese-atm-mandibula-esquerda.png" alt="Esquerda">
             </div>
 
-            <button type="button" onclick="removerUltimoGlobal()">Desfazer último</button>
+            <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
 
+                <label>
+                    <strong>
+                        Autorizo compartilhar, se necessário, as imagens do meu exame, bem como minhas informações clínicas,
+                        caso necessite de uma opinião de serviço de telerradiologia para auxiliar no meu diagnóstico.
+                    </strong>
+                </label>
 
+                <div style="margin-top: 20px;">
+                    <label style="margin-right: 15px;">
+                        <input type="radio" name="autorizacao" value="sim" required> Sim
 
+                        <input type="radio" name="autorizacao" value="nao"> Não
+                    </label>
+                </div>
 
-
-
+            </div>
+            <button type="button" onclick="changeStep('step1', 'step2')">Enviar</button>
     </div>
+    </div>
+    <!-- TELA 2 -->
+    <div id="step2" style="display:none;">
+        <h2>Assinatura do Paciente</h2>
+
+        <canvas id="canvas"></canvas>
+
+        <input type="hidden" name="signature" id="signature">
+
+        <br><br>
+
+        <button type="submit">
+            Finalizar e Gerar PDF
+        </button>
+        <button type="button" onclick="backStep()">Voltar</button>
+    </div>
+
     </form>
     </div>
 </body>

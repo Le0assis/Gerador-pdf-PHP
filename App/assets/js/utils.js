@@ -73,7 +73,7 @@ function initPainMarker({ imageId, canvasId, inputId }) {
     img.onload = resizeCanvas;
     window.addEventListener("resize", resizeCanvas);
 
-    canvas.addEventListener("click", function(e) {
+    canvas.addEventListener("click", function (e) {
         const rect = canvas.getBoundingClientRect();
 
         const x = e.clientX - rect.left;
@@ -111,3 +111,118 @@ function initPainMarker({ imageId, canvasId, inputId }) {
         removerUltimo
     });
 }
+
+
+document.querySelectorAll(".draw-area").forEach(area => {
+    const img = area.querySelector("img");
+    const canvas = area.querySelector("canvas");
+    const inputId = area.dataset.input;
+    const input = document.getElementById(inputId);
+
+    const ctx = canvas.getContext("2d");
+    let pontos = [];
+
+    function resizeCanvas() {
+        canvas.width = img.clientWidth;
+        canvas.height = img.clientHeight;
+
+        canvas.style.position = "absolute";
+        canvas.style.top = 0;
+        canvas.style.left = 0;
+    }
+
+    img.onload = resizeCanvas;
+    window.addEventListener("resize", resizeCanvas);
+
+    canvas.addEventListener("click", e => {
+        const rect = canvas.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        ctx.beginPath();
+        ctx.arc(x, y, 6, 0, Math.PI * 2);
+        ctx.fillStyle = "red";
+        ctx.fill();
+
+        pontos.push({ x, y });
+
+        input.value = JSON.stringify(pontos);
+    });
+});
+
+let signaturePad = null;
+
+function startSignature(canvasId, formId, inputHiddenId) {
+
+    const canvas = document.getElementById(canvasId);
+
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+
+    if (canvas.width === 0 || canvas.height === 0) {
+        console.log("Canvas ainda não visível");
+        return;
+    }
+
+    if (!signaturePad) {
+        signaturePad = new SignaturePad(canvas);
+    }
+
+    canvas.onclick = () => canvas.focus();
+
+    canvas.onkeydown = (event) => {
+        if (event.code === "Space") {
+            event.preventDefault();
+            signaturePad.clear();
+        }
+    };
+
+    document.getElementById(formId).onsubmit = function () {
+        if (!signaturePad.isEmpty()) {
+            document.getElementById(inputHiddenId).value =
+                signaturePad.toDataURL();
+        }
+    };
+}
+
+function changeStep(currentStepID, nextStepID) {
+
+    const form = document.getElementById("form");
+
+    if (!form.reportValidity()) return;
+
+    document.getElementById(currentStepID).style.display = "none";
+    document.getElementById(nextStepID).style.display = "block";
+
+    setTimeout(() => {
+        const canvas = document.getElementById("canvas");
+
+        if (canvas && canvas.offsetWidth > 0) {
+            startSignature("canvas", "form", "signature");
+        }
+    }, 100);
+}
+function backStep() {
+    if (signaturePad && !signaturePad.isEmpty()) {
+        document.getElementById("signature").value =
+            signaturePad.toDataURL();
+    }
+
+    changeStep('step2', 'step1');
+}
+
+
+
+function toggleRequired(inputId, $value) {
+
+    const input = document.getElementById(inputId);
+    if ($value === "sim") {
+        input.style.display = "block";
+        input.required = true;
+    } else {
+        input.style.display = "none";
+        input.required = false;
+    }
+}
+

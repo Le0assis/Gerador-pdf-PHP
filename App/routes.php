@@ -6,8 +6,8 @@ ini_set('display_errors', 1);
 $mpdf = new \Mpdf\Mpdf();
 // $mpdf = new \Mpdf\Mpdf();
 $css = file_get_contents(__DIR__ . "/assets/style/test.css");
-$pdfJs =  file_get_contents(__DIR__ . "/assets/js/signature.js");
-$js = file_get_contents(__DIR__ . "/assets/js/utils.js") . $pdfJs;
+// $pdfJs =  file_get_contents(__DIR__ . "/assets/js/signature.js");
+$js = file_get_contents(__DIR__ . "/assets/js/utils.js");
 
 
 // var_dump($js);

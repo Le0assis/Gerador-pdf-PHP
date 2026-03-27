@@ -73,7 +73,7 @@
             </div>
 
             <div>
-                <label><strong>3.  Alguma queixa de:</strong></label>
+                <label><strong>3. Alguma queixa de:</strong></label>
                 <table>
                     <tr>
                         <!-- Isso aqui ta repetido na 4 fala, fazer menu oblico -->
@@ -144,7 +144,7 @@
             </div>
             <div>
                 <label><strong>6. Trauma? </strong></label>
-                <input type="radio" name="trauma" value="sim" onclick="toggleMenu('menuTrauma', this.value)"> Sim
+                <input type="radio" name="trauma" value="sim" onclick="toggleMenu('menuTrauma', this.value)" required> Sim
                 <input type="radio" name="trauma" value="nao" onclick="toggleMenu('menuTrauma', this.value)"> Não
                 <div id="menuTrauma" style="display: none;">
                     <label for="data_trauma">Data do trauma: </label>
@@ -218,16 +218,16 @@
                             <td>
                                 <label><strong>Quimioterapia: </strong></label>
                             </td>
+                            <td><input type="radio" name="quimioterapia" value="sim" onclick="toggleMenu('quimioterapia_explicacao', this.value)" required>Sim</td>
                             <td><input type="radio" name="quimioterapia" value="nao" onclick="toggleMenu('quimioterapia_explicacao', this.value)">Não</td>
-                            <td><input type="radio" name="quimioterapia" value="sim" onclick="toggleMenu('quimioterapia_explicacao', this.value)">Sim</td>
                             <td><input type="text" name="quimioterapia_explicacao" id="quimioterapia_explicacao" style="display: none;" placeholder="Hà quanto tempo? e onde?"></td>
                         </tr>
                         <tr>
                             <td>
                                 <label><strong>Radioterapia: </strong></label>
                             </td>
+                            <td><input type="radio" name="radioterapia" value="sim" onclick="toggleMenu('radioterapia_explicacao', this.value)" required>Sim</td>
                             <td><input type="radio" name="radioterapia" value="nao" onclick="toggleMenu('radioterapia_explicacao', this.value)">Não</td>
-                            <td><input type="radio" name="radioterapia" value="sim" onclick="toggleMenu('radioterapia_explicacao', this.value)">Sim</td>
                             <td><input type="text" name="radioterapia_explicacao" id="radioterapia_explicacao" style="display: none;" placeholder="Hà quanto tempo? e onde?"></td>
                         </tr>
                     </table>
@@ -269,7 +269,7 @@
                                 <label>
                                     <strong>SUSPEITA DE GRAVIDEZ</strong>
                                     <br>
-                                    <input type="radio" name="suspeita_gravidez" value="sim"> Sim
+                                    <input type="radio" name="suspeita_gravidez" value="sim" required> Sim
                                     <input type="radio" name="suspeita_gravidez" value="nao"> Não
                                     <input type="radio" name="suspeita_gravidez" value="nao_aplica"> Não se aplica
                                 </label>
@@ -293,13 +293,13 @@
                             <td>
                                 <label>
                                     Asma:
-                                    <input type="radio" name="asma" value="sim"> Sim
+                                    <input type="radio" name="asma" value="sim" required> Sim
                                     <input type="radio" name="asma" value="nao"> Não
                                 </label>
                             </td>
                             <td>
                                 <label>IR:
-                                    <input type="radio" name="IR" value="sim" onchange="toggleRequired('IR_descricao', this.value)">
+                                    <input type="radio" name="IR" value="sim" onchange="toggleRequired('IR_descricao', this.value)" required>
                                     Sim
                                     <input type="radio" name="IR" value="nao" onchange="toggleRequired('IR_descricao', this.value)">
                                     Não
@@ -312,23 +312,25 @@
                         </tr>
                     </table>
                 </div>
-                <div>
-                    <label><strong>
-                            Autorizo compartilhar, se necessário, as imagens do meu exame, bem como minhas informações clinicas,
+
+
+                <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+
+                    <label>
+                        <strong>
+                            Autorizo compartilhar, se necessário, as imagens do meu exame, bem como minhas informações clínicas,
                             caso necessite de uma opinião de serviço de telerradiologia para auxiliar no meu diagnóstico.
-                        </strong></label>
-                    <label>
-                        <strong>
-                            <input type="radio" name="autorizacao" value="sim">
-                            Sim
                         </strong>
                     </label>
-                    <label>
-                        <strong>
-                            <input type="radio" name="autorizacao" value="nao">
-                            Não
-                        </strong>
-                    </label>
+
+                    <div style="margin-top: 20px;">
+                        <label style="margin-right: 15px;">
+                            <input type="radio" name="autorizacao" value="sim" required> Sim
+
+                            <input type="radio" name="autorizacao" value="nao"> Não
+                        </label>
+                    </div>
+
                 </div>
                 <button type="button" onclick="changeStep('step1', 'step2')">Enviar</button>
             </div>
@@ -346,7 +348,7 @@
         <button type="submit">
             Finalizar e Gerar PDF
         </button>
-        <button type="button" onclick="changeStep('step2', 'step1')">Voltar</button>
+        <button type="button" onclick="backStep()">Voltar</button>
     </div>
     </form>
 

@@ -16,24 +16,24 @@
             <div class="grid">
                 <label>
                     Nome:
-                    <input type="text" id="nome" name="nome">
+                    <input type="text" id="nome" name="nome" required>
                 </label>
 
                 <label>
                     Idade:
-                    <input type="number" id="idade" name="idade">
+                    <input type="number" id="idade" name="idade" required>
                 </label>
 
                 <label>
                     Peso:
-                    <input type="number" id="peso" name="peso" step="any">
+                    <input type="number" id="peso" name="peso" step="any" required>
                 </label>
             </div>
 
             <div>
                 <label>
                     1. Motivo do exame e início da sintomatologia:
-                    <textarea id="motivo_exame" name="motivo_exame"></textarea>
+                    <textarea id="motivo_exame" name="motivo_exame" required></textarea>
                 </label>
             </div>
 
@@ -47,7 +47,7 @@
                 <label>3. Teve convulsões?</label>
 
                 <label>
-                    <input type="radio" name="convulsoes" value="sim" onclick="toggleMenu('convulsoesMenu', this.value)"> Sim
+                    <input type="radio" name="convulsoes" value="sim" onclick="toggleMenu('convulsoesMenu', this.value)" required> Sim
                 </label>
                 <label>
                     <input type="radio" name="convulsoes" value="nao" onclick="toggleMenu('convulsoesMenu', this.value)"> Não
@@ -129,7 +129,7 @@
             <div>
                 <label>
                     8. Paciente é criança ou teve filhos?
-                    <input type="radio" name="criancas" onclick="toggleMenu('childrenMenu', this.value)" value="sim"> Sim
+                    <input type="radio" name="criancas" onclick="toggleMenu('childrenMenu', this.value)" value="sim" required> Sim
                     <input type="radio" name="criancas" onclick="toggleMenu('childrenMenu', this.value)" value="nao"> Não
                 </label>
             </div>
@@ -148,101 +148,102 @@
                         <td>
                             <label>
                                 <strong>CREATINA SÉRICA</strong>
-                            <input type="text" name="creatina_serica">
-                        </label>
+                                <input type="text" name="creatina_serica">
+                            </label>
                         </td>
                         <td>
                             <label>
                                 <strong>DATA</strong>
-                            <input type="date" name="data">
-                        </label>
+                                <input type="date" name="data">
+                            </label>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label>
-                                <strong>SUSPEITA DE GRAVIDEZ</strong>
-                            <input type="radio" name="suspeita_gravidez" value="sim"> Sim
-                            <input type="radio" name="suspeita_gravidez" value="nao"> Não
-                            <input type="radio" name="suspeita_gravidez" value="nao_aplica"> Não se aplica
-                        </label>
+                                <strong>SUSPEITA DE GRAVIDEZ</strong> <br>
+                                <input type="radio" name="suspeita_gravidez" value="sim" required> Sim
+                                <input type="radio" name="suspeita_gravidez" value="nao"> Não
+                                <input type="radio" name="suspeita_gravidez" value="nao_aplica"> Não se aplica
+                            </label>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label>
-                                Alergias: 
-                            <input type="text" name="alergias">
+                                Alergias:
+                                <input type="text" name="alergias">
                             </label>
                         </td>
                         <td>
                             <label>
                                 Doença de base:
-                            <input type="text" name="doenca_base">
-                        </label>
+                                <input type="text" name="doenca_base">
+                            </label>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label>
-                                Asma: 
-                            <input type="radio" name="asma" value="sim"> Sim
-                            <input type="radio" name="asma" value="nao"> Não
-                        </label>
+                                Asma:
+                                <input type="radio" name="asma" value="sim" required> Sim
+                                <input type="radio" name="asma" value="nao"> Não
+                            </label>
                         </td>
                         <td>
-                            <label>IR: 
+                            <label>IR:
                                 <input type="radio" name="IR" value="sim" onchange="toggleRequired('IR_descricao', this.value)">
                                 Sim
                                 <input type="radio" name="IR" value="nao" onchange="toggleRequired('IR_descricao', this.value)">
                                 Não
                             </label>
-                         
-                                <input type="text" id="IR_descricao" placeholder="Descreva a IR" name="IR_descricao" style="Display: none;">
-               
+
+                            <input type="text" id="IR_descricao" placeholder="Descreva a IR" name="IR_descricao" style="Display: none;">
 
                         </td>
                     </tr>
                 </table>
             </div>
-            <div>
-                <label><strong>
-                        Autorizo compartilhar, se necessário, as imagens do meu exame, bem como minhas informações clinicas,
+
+
+            <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+
+                <label>
+                    <strong>
+                        Autorizo compartilhar, se necessário, as imagens do meu exame, bem como minhas informações clínicas,
                         caso necessite de uma opinião de serviço de telerradiologia para auxiliar no meu diagnóstico.
-                    </strong></label>
-                <label>
-                    <strong>
-                        <input type="radio" name="autorizacao" value="sim">
-                        Sim
                     </strong>
                 </label>
-                <label>
-                    <strong>
-                        <input type="radio" name="autorizacao" value="nao">
-                        Não
-                    </strong>
-                </label>
+
+                <div style="margin-top: 20px;">
+                    <label style="margin-right: 15px;">
+                        <input type="radio" name="autorizacao" value="sim" required> Sim
+
+                        <input type="radio" name="autorizacao" value="nao"> Não
+                    </label>
+                </div>
+
             </div>
             <button type="button" onclick="changeStep('step1', 'step2')">Enviar</button>
-        </div>
-          <!-- TELA 2 -->
-        <div id="step2" style="display:none;">
-            <h2>Assinatura do Paciente</h2>
+    </div>
+    <!-- TELA 2 -->
+    <div id="step2" style="display:none;">
+        <h2>Assinatura do Paciente</h2>
 
-            <canvas id="canvas"></canvas>
+        <canvas id="canvas"></canvas>
 
-            <input type="hidden" name="signature" id="signature">
+        <input type="hidden" name="signature" id="signature">
 
-            <br><br>
+        <br><br>
 
-            <button type="submit">
-                Finalizar e Gerar PDF
-            </button>
-            <button type="button" onclick="changeStep('step2', 'step1')">Voltar</button>
-        </div>
+        <button type="submit">
+            Finalizar e Gerar PDF
+        </button>
+        <button type="button" onclick="changeStep('step2', 'step1')">Voltar</button>
+    </div>
 
 
-        
+
     </form>
 
 </body>

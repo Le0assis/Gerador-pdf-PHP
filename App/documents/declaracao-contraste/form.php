@@ -17,13 +17,13 @@
 
                 Nome:
                 <input type="text" name="nome" required>
-                <p>"Eu ___________ declaro que fui submetido(a) ao
+                <label>"Eu ___________ declaro que fui submetido(a) ao
                     exame de imagem, com uso de contraste, conforme solicitação médica.
                     Estou ciente que, de acordo com as condutas médicas e protocolos de radiologia, além do
                     médico solicitante, também é de responsabilidade do médico radiologista indicar a
                     utilização de contraste, a fim de garantir uma melhor definição das imagens e um
                     diagnóstico preciso."
-                </p>
+                </label>
                 <br><br>
 
                 <button type="button" onclick="changeStep('step1', 'step2')" id="btnAssinar">
